@@ -38,12 +38,12 @@
   </head>
 
   <body class="bg-brand-background text-brand-foreground">
-    <div id="root" class="flex flex-col gap-8"></div>
+    <div id="root" class="flex flex-col gap-12 mt-8"></div>
 
     <script type="text/babel" data-presets="react,stage-3">
       const Title = () => {
         return (
-          <div class="flex flex-col md:flex-row gap-4 text-7xl justify-center text-balance text-center">
+          <div class="flex flex-col md:flex-row gap-4 text-7xl justify-center text-balance text-center bg-brand-box p-4 md:mx-4 md:rounded-lg">
             <div class="h-[4.55rem]">
               <svg
                 height="100%"
@@ -82,6 +82,17 @@
 
             <h1 class="font-bold inline">TPH Tier List</h1>
           </div>
+        );
+      };
+
+      const Footer = () => {
+        return (
+          <footer>
+            <p class="text-center text-sm bg-brand-box p-4 md:mx-4 md:rounded-lg">
+              Made with ❤️ by{" "}
+              <a href="https://discord.gg/programming">The Memebers of TPH</a>
+            </p>
+          </footer>
         );
       };
 
@@ -129,7 +140,10 @@
           <div id="chart" class="bg-brand-box p-4 md:mx-4 md:rounded-lg">
             <ol class="flex flex-col gap-4 md:gap-8">
               {tiersOrder.map((tier) => (
-                <li key={tier} class="flex flex-row gap-4 md:gap-8">
+                <li
+                  key={tier}
+                  class="flex flex-col sm:flex-row gap-4 md:gap-8 items-center"
+                >
                   <h2
                     class="text-2xl md:text-3xl font-bold h-20 w-20 text-brand-knockout flex items-center justify-center"
                     style={{
@@ -142,11 +156,16 @@
                     {tiers[tier].items.map((item) => (
                       <li
                         key={item}
-                        class="m-2 md:m-4 p-2 md:p-4 bg-brand-knockout rounded-lg text-center"
+                        class="m-4 p-4 bg-brand-knockout rounded-lg text-center"
                       >
                         {item}
                       </li>
                     ))}
+                    {!tiers[tier].items.length && (
+                      <li class="m-4 p-4 rounded-lg text-center">
+                        No items in this tier
+                      </li>
+                    )}
                   </ul>
                 </li>
               ))}
@@ -160,6 +179,7 @@
           <>
             <Title />
             <Tiers />
+            <Footer />
           </>
         );
       };
